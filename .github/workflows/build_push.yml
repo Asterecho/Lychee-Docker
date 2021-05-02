@@ -173,5 +173,5 @@ jobs:
         name: Retag image
         run: |
           crane auth login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} hub.docker.com
-          crane tag lycheeorg/lychee:testing-${{ github.run_id }} ${{ github.event.inputs.tagname }}
-          crane cp lycheeorg/lychee:testing-${{ github.run_id }} lycheeorg/lychee-laravel:${{ github.event.inputs.tagname }}
+          crane tag -v lycheeorg/lychee:testing-${{ github.run_id }} ${{ github.event.inputs.tagname }}
+          crane cp -v lycheeorg/lychee:testing-${{ github.run_id }} lycheeorg/lychee-laravel:${{ github.event.inputs.tagname }}
