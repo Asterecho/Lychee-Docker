@@ -18,25 +18,28 @@ RUN \
     addgroup --gid "$PGID" "$USER" && \
     adduser --gecos '' --no-create-home --disabled-password --uid "$PUID" --gid "$PGID" "$USER"
 
+COPY sury-php.gpg /etc/apt/trusted.gpg.d/
+
 # Install base dependencies, clone the repo and install php libraries
 RUN \
     set -ev && \
     apt-get update && \
-    apt-get install -qy \
+    apt-get -y install --no-install-recommends apt-transport-https ca-certificates && \
+    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/sury-php.list && \
+    apt-get update && \
+    apt-get install -qy --no-install-recommends \
     nginx-light \
-    php7.4-mysql \
-    php7.4-pgsql \
-    php7.4-sqlite3 \
-    php7.4-imagick \
-    php7.4-mbstring \
-    php7.4-json \
-    php7.4-gd \
-    php7.4-xml \
-    php7.4-zip \
-    php7.4-fpm \
-    php7.4-redis \
-    php7.4-bcmath \
-    php7.4-intl \
+    php8.0-mysql \
+    php8.0-pgsql \
+    php8.0-sqlite3 \
+    php8.0-imagick \
+    php8.0-mbstring \
+    php8.0-gd \
+    php8.0-xml \
+    php8.0-zip \
+    php8.0-fpm \
+    php8.0-redis \
+    php8.0-bcmath \
     curl \
     libimage-exiftool-perl \
     ffmpeg \
